@@ -13,6 +13,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const env = require('../config/prod.env')
 
+var ZipPlugin = require('zip-webpack-plugin')
+
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
@@ -115,7 +117,11 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new ZipPlugin({
+      path:path.join(__dirname,'../dist'),
+      filename: 'dist.zip'
+    })
   ]
 })
 
