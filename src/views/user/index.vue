@@ -167,6 +167,7 @@
       modifyUser(data) {
         this.dialogStatus = 'update'
         this.visible = true
+        //获取修改初始化的数据
         this.initUserData.userId = data.userId
         this.initUserData.userName = data.userName
         this.initUserData.userAccount = data.userAccount

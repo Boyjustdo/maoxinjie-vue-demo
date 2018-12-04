@@ -55,23 +55,14 @@
           label: 'orgName',
           children: 'children'
         },
-        orgData: [],
-        total: 0,
-        query: {
-          pageNum: 1,
-          pageSize: 10
-        },
-        visible: false,//新增界面是否显示
         userOrgId: null,
-        node: {
-          level: 0
-        },
         title: {
-          true: '机构编辑',
-          false: '机构新增'
+          true: '修改组织机构',
+          false: '新增组织机构'
         },
         //表单状态
         dialogStatus: '',
+        //是否可见可用
         dialogVisible: false,
         orgForm: {
           orgId: null,
@@ -84,7 +75,6 @@
     },
     mounted() {
     },
-
     methods: {
       //懒加载时触发
       async loadNodes(node, resolve) {
@@ -99,14 +89,6 @@
       },
       loadData(){
           this.$router.push({ name: '组织机构'})
-      },
-      pageChange(page){
-        this.query.pageNum = page
-        this.loadData()
-      },
-
-      addDialog() {
-        this.visible = true
       },
       /*删除操作*/
       deleteOrgTree (data) {
@@ -133,7 +115,7 @@
         })
       },
       //添加操作
-      createOrgTree(data) {
+      createOrgTree() {
         this.dialogVisible = true
         this.dialogStatus = false
         // 对象赋值

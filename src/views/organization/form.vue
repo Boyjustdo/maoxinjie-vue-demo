@@ -1,7 +1,6 @@
 <template>
   <el-dialog
-    :visible.sync="show" title="新增机构部门" :close-on-click-modal="false">
-
+    :visible.sync="show" :title="title[dialogStatus]" :close-on-click-modal="false">
     <div>
       <el-form ref="form" :model="orgForm" label-width="100px"  :rules="rules" >
         <el-form-item label="父级id" label-width="100px" :hidden="true" prop="orgPid">
@@ -47,6 +46,14 @@
         Type: Array,
         required: true
       },
+      dialogStatus: {
+        Type: String,
+        required: true
+      },
+      title: {
+        Type: Map,
+        required: true
+      }
     },
     watch: {
       show (val) {
@@ -90,7 +97,6 @@
           label: 'orgName',
           children: 'children'
         },
-        selectedOptions2: []
       }
     },
     methods: {
@@ -133,12 +139,13 @@
               resp = await orgApi.create(this.orgForm)
             }
             if(resp.code === 200) {
+              this.visible = false
               this.$emit('success')
               this.$message({
                 message: '操作成功',
                 type: 'success'
               })
-              this.visible = false
+
             }
           }
         })
